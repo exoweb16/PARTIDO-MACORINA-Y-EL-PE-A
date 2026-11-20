@@ -1,567 +1,372 @@
 
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Partido Macorina y El Peña | Criadero de Gallos Finos</title>
-    <!-- Fuentes de Google para darle un toque clásico y moderno a la vez -->
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        crimson: {
+                            DEFAULT: '#6b1218',
+                            dark: '#42090d',
+                            light: '#8f1b23',
+                        },
+                        gold: {
+                            DEFAULT: '#c59b27',
+                            light: '#e0bc53',
+                            dark: '#967213',
+                        },
+                        earth: {
+                            dark: '#14110f',
+                            card: '#1f1a17',
+                            border: '#362d27',
+                            sand: '#ede6db',
+                            muted: '#a89f94'
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Cinzel', 'serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* --- VARIABLES DE COLOR Y ESTILO --- */
-        :root {
-            --bg-dark: #12100e;       /* Negro carbón / madera oscura */
-            --bg-card: #1d1916;       /* Marrón muy oscuro para tarjetas */
-            --gold: #d4af37;          /* Dorado clásico */
-            --gold-hover: #f3ce5b;    /* Dorado brillante */
-            --crimson: #8b1e1e;       /* Rojo sangre / cresta */
-            --text-light: #f5f5f5;    /* Blanco hueso */
-            --text-muted: #a89f91;    /* Gris cálido */
+        .bg-hero-pattern {
+            background-color: #14110f;
+            background-image: 
+                radial-gradient(circle at 50% 35%, rgba(107, 18, 24, 0.45) 0%, rgba(20, 17, 15, 0.96) 75%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c59b27' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-
-        /* --- RESET BÁSICO --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        h1, h2, h3, .logo {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 1px;
-        }
-
-        /* --- BARRA DE NAVEGACIÓN --- */
-        header {
-            background-color: rgba(18, 16, 14, 0.95);
-            border-bottom: 2px solid var(--gold);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--gold);
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .logo span {
-            color: var(--text-light);
-            font-size: 1.1rem;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-        }
-
-        nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--gold);
-        }
-
-        /* --- SECCIÓN PRINCIPAL (HERO) --- */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(18, 16, 14, 0.95)), 
-                        url('https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            margin-top: 60px;
-        }
-
-        .hero-subtitle {
-            color: var(--gold);
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .hero h1 {
-            font-size: 3.8rem;
-            color: var(--text-light);
-            margin-bottom: 20px;
-            text-shadow: 2px 4px 10px rgba(0,0,0,0.8);
-        }
-
-        .hero p {
-            max-width: 650px;
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 35px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 14px 32px;
-            background-color: var(--crimson);
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            border: 1px solid var(--gold);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: var(--gold);
-            color: var(--bg-dark);
-        }
-
-        /* --- ESTILOS GENERALES DE SECCIÓN --- */
-        section {
-            padding: 80px 8%;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
-
-        .section-title .divider {
-            width: 80px;
-            height: 3px;
-            background-color: var(--crimson);
-            margin: 0 auto;
-        }
-        /* --- NOSOTROS --- */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--text-light);
-        }
-
-        .about-text p {
-            color: var(--text-muted);
-            margin-bottom: 15px;
-        }
-
-        .about-stats {
-            display: flex;
-            gap: 30px;
-            margin-top: 25px;
-            border-top: 1px solid #332c26;
-            padding-top: 20px;
-        }
-
-        .stat h4 {
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            color: var(--gold);
-        }
-
-        .stat span {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        .about-img {
-            border: 2px solid var(--gold);
-            padding: 10px;
-            background-color: var(--bg-card);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            filter: contrast(1.1);
-        }
-
-        /* --- LÍNEAS DE SANGRE (TARJETAS) --- */
-        .bloodlines {
-            background-color: #161311;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background-color: var(--bg-card);
-            border: 1px solid #332c26;
-            transition: transform 0.3s, border-color 0.3s;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: var(--gold);
-        }
-
-        .card-img {
-            height: 220px;
-            background-color: #2a241f;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .card-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .card:hover .card-img img {
-            transform: scale(1.08);
-        }
-
-        .tag {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background-color: var(--crimson);
-            color: var(--text-light);
-            padding: 4px 10px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            border: 1px solid var(--gold);
-        }
-
-        .card-content {
-            padding: 25px;
-        }
-
-        .card-content h3 {
-            color: var(--gold);
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-        }
-
-        .card-content p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-        }
-
-        .specs {
-            list-style: none;
-            font-size: 0.85rem;
-            color: var(--text-light);
-            border-top: 1px solid #332c26;
-            padding-top: 12px;
-        }
-
-        .specs li {
-            margin-bottom: 5px;
-        }
-
-        .specs strong {
-            color: var(--gold);
-        }
-
-        /* --- CONTACTO --- */
-        .contact-container {
-            max-width: 700px;
-            margin: 0 auto;
-            background-color: var(--bg-card);
-            padding: 40px;
-            border: 1px solid var(--gold);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--gold);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--bg-dark);
-            border: 1px solid #3d352e;
-            color: var(--text-light);
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--gold);
-        }
-
-        .contact-container .btn {
-            width: 100%;
-            text-align: center;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background-color: #0b0a09;
-            text-align: center;
-            padding: 30px 20px;
-            border-top: 1px solid #2b2520;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        footer strong {
-            color: var(--gold);
-        }
-
-        /* --- RESPONSIVE (MÓVILES) --- */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-            nav ul {
-                gap: 15px;
-                font-size: 0.8rem;
-            }
+        .gold-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #c59b27, transparent);
         }
     </style>
 </head>
-<body>
+<body class="bg-earth-dark text-earth-sand font-sans antialiased selection:bg-crimson selection:text-gold-light">
 
-    <!-- ENCABEZADO Y NAVEGACIÓN -->
-    <header>
-        <a href="#" class="logo">Partido <span>Macorina y El Peña</span></a>
-        <nav>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#nosotros">El Criadero</a></li>
-                <li><a href="#lineas">Líneas de Sangre</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
+    <!-- Navegación -->
+    <header class="fixed top-0 w-full z-50 bg-earth-dark/90 backdrop-blur-md border-b border-earth-border">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo / Nombre -->
+                <a href="#inicio" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 rounded-full bg-crimson border border-gold flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                        <i data-lucide="award" class="w-5 h-5 text-gold-light"></i>
+                    </div>
+                    <div>
+                        <span class="font-display font-bold text-lg tracking-wider text-gold-light block leading-none">MACORINA Y EL PEÑA</span>
+                        <span class="text-[11px] uppercase tracking-[0.2em] text-earth-muted">Criadero de Gallos Finos</span>
+                    </div>
+                </a>
+
+                <!-- Enlaces Desktop -->
+                <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
+                    <a href="#historia" class="text-earth-sand hover:text-gold-light transition-colors">Tradición</a>
+                    <a href="#lineas" class="text-earth-sand hover:text-gold-light transition-colors">Líneas Genéticas</a>
+                    <a href="#instalaciones" class="text-earth-sand hover:text-gold-light transition-colors">Crianza</a>
+                    <a href="#ubicacion" class="text-earth-sand hover:text-gold-light transition-colors">Ubicación y Contacto</a>
+                </nav>
+
+                <!-- Botón Directo WhatsApp -->
+                <div class="hidden sm:block">
+                    <a href="https://wa.me/525666401617" target="_blank" rel="noopener noreferrer" 
+                       class="inline-flex items-center gap-2 px-4 py-2 rounded border border-gold text-gold-light hover:bg-gold hover:text-earth-dark font-semibold text-xs uppercase tracking-wider transition-all">
+                        <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
+                        Trato Directo
+                    </a>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <!-- PORTADA PRINCIPAL -->
-    <section id="inicio" class="hero">
-        <span class="hero-subtitle">Criadero de Gallos Finos</span>
-        <h1>Partido Macorina y El Peña</h1>
-        <p>Selección genética de alto rendimiento, casta probada en los mejores palenques y crianza bajo estrictos estándares de salud y acondicionamiento.</p>
-        <a href="#lineas" class="btn">Conocer Nuestras Líneas</a>
+    <!-- Sección Principal (Hero) -->
+    <section id="inicio" class="relative pt-32 pb-24 md:pt-44 md:pb-36 bg-hero-pattern border-b border-earth-border overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
+            <!-- Emblema Superior -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-earth-card border border-gold/40 text-gold-light text-xs uppercase tracking-[0.25em] mb-8">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-gold"></i>
+                Santa Isabel Ixtapan, Estado de México
+            </div>
+
+            <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                PARTIDO <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-light via-gold to-gold-dark">
+                    MACORINA Y EL PEÑA
+                </span>
+            </h1>
+
+            <p class="font-serif italic text-xl sm:text-2xl text-earth-sand/90 max-w-2xl mx-auto mb-10">
+                "Castas seleccionadas con rigor, crianza en libertad y respeto absoluto por la tradición gallística de México."
+            </p>
+
+            <div class="gold-divider max-w-md mx-auto mb-10"></div>
+
+            <!-- Botones de Acción Directa (Sin formularios) -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#lineas" class="w-full sm:w-auto px-8 py-4 bg-crimson hover:bg-crimson-light text-white font-display font-bold tracking-widest text-sm uppercase rounded border border-gold/50 shadow-xl transition-all">
+                    Conocer Nuestras Líneas
+                </a>
+                <a href="#ubicacion" class="w-full sm:w-auto px-8 py-4 bg-earth-card hover:bg-earth-border text-gold-light font-display font-bold tracking-widest text-sm uppercase rounded border border-earth-border transition-all">
+                    Visitar el Criadero
+                </a>
+            </div>
+        </div>
     </section>
 
-    <!-- SECCIÓN EL CRIADERO -->
-    <section id="nosotros">
-        <div class="section-title">
-            <h2>Tradición y Casta</h2>
-            <div class="divider"></div>
+    <!-- Historia y Tradición -->
+    <section id="historia" class="py-20 md:py-28 bg-earth-dark">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Columna Izquierda: Texto -->
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="text-gold uppercase tracking-[0.25em] text-xs font-bold block">Nuestra Esencia</span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white leading-snug">
+                        Forjando Sangre de Campeones en Santa Isabel Ixtapan
+                    </h2>
+                    <div class="w-20 h-1 bg-crimson"></div>
+                    <p class="text-earth-sand/85 leading-relaxed text-base sm:text-lg">
+                        El <strong class="text-gold-light">Partido Macorina y El Peña</strong> nace de la pasión genuina y el compromiso con la crianza selectiva del gallo fino de combate. Arraigados en <strong>Santa Isabel Ixtapan</strong>, municipio de Atenco, hemos dedicado años a consolidar pies de cría que destacan por su inteligencia, corte, resistencia y ley.
+                    </p>
+                    <p class="text-earth-sand/85 leading-relaxed text-base sm:text-lg">
+                        Cada ejemplar es criado bajo estrictos estándares de nutrición, sanidad y manejo en voladeros naturales, garantizando aves con plumaje impecable, estructura ósea sólida y un temperamento probado en los mejores palenques y derbies del país.
+                    </p>
+
+                    <!-- Pilares -->
+                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-earth-border">
+                        <div>
+                            <span class="font-display text-2xl sm:text-3xl font-bold text-gold-light block">100%</span>
+                            <span class="text-xs text-earth-muted uppercase tracking-wider">Sangre Seleccionada</span>
+                        </div>
+                        <div>
+                            <span class="font-display text-2xl sm:text-3xl font-bold text-gold-light block">Crianza</span>
+                            <span class="text-xs text-earth-muted uppercase tracking-wider">En Libertad y Sol</span>
+                        </div>
+                        <div>
+                            <span class="font-display text-2xl sm:text-3xl font-bold text-gold-light block">Atenco</span>
+                            <span class="text-xs text-earth-muted uppercase tracking-wider">Tradición Mexiquense</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Tarjeta Distintiva -->
+                <div class="lg:col-span-5">
+                    <div class="bg-earth-card border border-gold/30 rounded-lg p-8 shadow-2xl relative">
+                        <div class="absolute -top-4 -right-4 w-12 h-12 bg-crimson border border-gold rounded-full flex items-center justify-center">
+                            <i data-lucide="shield-check" class="w-6 h-6 text-gold-light"></i>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-gold-light mb-4 tracking-wide">Compromiso del Partido</h3>
+                        <ul class="space-y-4 text-sm text-earth-sand/90">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-gold shrink-0 mt-0.5"></i>
+                                <span><strong>Registros Genealógicos:</strong> Control riguroso de cruzas, placas y anillos de nacimiento.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-gold shrink-0 mt-0.5"></i>
+                                <span><strong>Medicina Preventiva:</strong> Calendarios completos de vacunación y desparasitación supervisados.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-gold shrink-0 mt-0.5"></i>
+                                <span><strong>Selección Rigurosa:</strong> Solo los ejemplares que cumplen con fenotipo y casta pasan a reproducción.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-gold shrink-0 mt-0.5"></i>
+                                <span><strong>Trato Serio y Directo:</strong> Atención personalizada en nuestro criadero previa cita.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="about-grid">
-            <div class="about-text">
-                <h3>Pasión por la Gallística</h3>
-                <p>En <strong>Partido Macorina y El Peña</strong> nos dedicamos a la crianza, selección y cuido de aves de combate de la más alta calidad. Nuestro compromiso radica en mantener sangres
-                 limpias y realizar cruzas estratégicas que garanticen inteligencia, corte y resistencia.</p>
-                <p>Cada ejemplar cuenta con registro genealógico, alimentación balanceada desde el nacimiento y amplios voladeros para un desarrollo muscular óptimo.</p>
+    </section>
+
+    <!-- Líneas Genéticas -->
+    <section id="lineas" class="py-20 md:py-28 bg-earth-card border-y border-earth-border">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-gold uppercase tracking-[0.25em] text-xs font-bold block mb-2">Pies de Cría</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Nuestras Líneas Genéticas</h2>
+                <p class="text-earth-muted text-sm sm:text-base">
+                    Trabajamos sangres probadas que se complementan en velocidad, resistencia y capacidad de definición.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Línea 1 -->
+                <div class="bg-earth-dark border border-earth-border hover:border-gold/60 rounded-lg p-6 transition-all group">
+                    <div class="w-12 h-12 rounded bg-crimson/30 border border-crimson flex items-center justify-center mb-5 group-hover:bg-crimson transition-colors">
+                        <i data-lucide="flame" class="w-6 h-6 text-gold-light"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-gold-light mb-2">Kelso</h3>
+                    <p class="text-xs uppercase tracking-widest text-earth-muted mb-3">Inteligencia y Rapidez</p>
+                    <p class="text-sm text-earth-sand/80 leading-relaxed">
+                        Aves de gran agilidad mental y desplazamiento lateral. Destacan por su capacidad para evitar el castigo y responder con precisión quirúrgica.
+                    </p>
+                </div>
+
+                <!-- Línea 2 -->
+                <div class="bg-earth-dark border border-earth-border hover:border-gold/60 rounded-lg p-6 transition-all group">
+                    <div class="w-12 h-12 rounded bg-crimson/30 border border-crimson flex items-center justify-center mb-5 group-hover:bg-crimson transition-colors">
+                        <i data-lucide="shield" class="w-6 h-6 text-gold-light"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-gold-light mb-2">Hatch</h3>
+                    <p class="text-xs uppercase tracking-widest text-earth-muted mb-3">Poder y Resistencia</p>
+                    <p class="text-sm text-earth-sand/80 leading-relaxed">
+                        Ejemplares de fuerte osamenta, golpe contundente y fondo inagotable. La base ideal para aportar fortaleza y corazón a nuestras cruzas.
+                    </p>
+                </div>
+
+                <!-- Línea 3 -->
+                <div class="bg-earth-dark border border-earth-border hover:border-gold/60 rounded-lg p-6 transition-all group">
+                    <div class="w-12 h-12 rounded bg-crimson/30 border border-crimson flex items-center justify-center mb-5 group-hover:bg-crimson transition-colors">
+                        <i data-lucide="zap" class="w-6 h-6 text-gold-light"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-gold-light mb-2">Sweater</h3>
+                    <p class="text-xs uppercase tracking-widest text-earth-muted mb-3">Explosividad y Corte</p>
+                    <p class="text-sm text-earth-sand/80 leading-relaxed">
+                        Gallos eléctricos, de gran vuelo y ofensiva constante. Reconocidos por su plumaje vistoso y su velocidad para definir desde el primer encuentro.
+                    </p>
+                </div>
+
+                <!-- Línea 4 -->
+                <div class="bg-earth-dark border border-earth-border hover:border-gold/60 rounded-lg p-6 transition-all group">
+                    <div class="w-12 h-12 rounded bg-crimson/30 border border-crimson flex items-center justify-center mb-5 group-hover:bg-crimson transition-colors">
+                        <i data-lucide="crown" class="w-6 h-6 text-gold-light"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-gold-light mb-2">Asil / Orientales</h3>
+                    <p class="text-xs uppercase tracking-widest text-earth-muted mb-3">Aplomo y Resistencia</p>
+                    <p class="text-sm text-earth-sand/80 leading-relaxed">
+                        Aportan musculatura densa, temple inquebrantable y resistencia superior para refrescar sangres y producir cuartos de milla altamente competitivos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instalaciones y Manejo -->
+    <section id="instalaciones" class="py-20 md:py-28 bg-earth-dark">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-gold uppercase tracking-[0.25em] text-xs font-bold block mb-2">Infraestructura</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Crianza y Desarrollo Integral</h2>
+                <p class="text-earth-muted text-sm sm:text-base">
+                    El entorno donde crece el gallo determina su rendimiento físico. Nuestras instalaciones en Santa Isabel Ixtapan están diseñadas para cada etapa de vida.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="border-l-2 border-gold pl-6 py-2">
+                    <h3 class="font-display text-lg font-bold text-white mb-2">1. Lotes de Reproducción</h3>
+                    <p class="text-sm text-earth-sand/80 leading-relaxed">
+                        Corrales individuales amplios con sombra natural y control sanitario estricto para sementales y gallinas progenitoras.
+                    </p>
+                </div>
+                <div class="border-l-2 border-gold pl-6 py-2">
+                    <h3 class="font-display text-lg font-bold text-white mb-2">2. Sueltas y Voladeros</h3>
+                    <p class="text-sm text-earth-sand/80 leading-relaxed">
+                        Áreas arboladas donde los pollos desarrollan musculatura, capacidad pulmonar y reflejos naturales en libertad.
+                    </p>
+                </div>
+                <div class="border-l-2 border-gold pl-6 py-2">
+                    <h3 class="font-display text-lg font-bold text-white mb-2">3. Cuido y Acondicionamiento</h3>
+                    <p class="text-sm text-earth-sand/80 leading-relaxed">
+                        Rascaderos individuales ventilados y dieta balanceada a base de granos seleccionados, vitaminas y suplementación natural.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ubicación y Contacto Directo (Sin Formularios) -->
+    <footer id="ubicacion" class="bg-earth-card border-t border-gold/40 pt-16 pb-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 pb-12 border-b border-earth-border">
                 
-                <div class="about-stats">
-                    <div class="stat">
-                        <h4>100%</h4>
-                        <span>Sangre Probada</span>
+                <!-- Columna 1: Identidad -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-9 h-9 rounded-full bg-crimson border border-gold flex items-center justify-center">
+                            <i data-lucide="award" class="w-4 h-4 text-gold-light"></i>
+                        </div>
+                        <span class="font-display font-bold text-lg text-gold-light tracking-wider">MACORINA Y EL PEÑA</span>
                     </div>
-                    <div class="stat">
-                        <h4>+15</h4>
-                        <span>Años de Experiencia</span>
-                    </div>
-                    <div class="stat">
-                        <h4>Top</h4>
-                        <span>Genética Importada</span>
-                    </div>
-                </div>    
-            </div>
-            <div class="about-img">
-                <!-- Imagen referencial de gallo -->
-                <img src="https://images.unsplash.com/photo-1569396116180-210c182bedb8?auto=format&fit=crop&w=800&q=80" alt="Ejemplar del Criadero"
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN LÍNEAS DE SANGRE -->
-    <section id="lineas" class="bloodlines">
-        <div class="section-title">
-            <h2>Nuestras Líneas de Sangre</h2>
-            <div class="divider"></div>
-        </div>
-        
-        <div class="cards-grid">
-            <!-- Tarjeta 1 -->
-            <div class="card">
-                <div class="card-img">
-                    <span class="tag">Semental Base</span>
- <img src="https://images.unsplash.com/photo-1612170153139-6f881ff067e0?auto=format&fit=crop&w=600&q=80" alt="Línea Kelso">
+                    <p class="text-sm text-earth-muted leading-relaxed mb-4">
+                        Criadero de gallos finos de combate. Dedicación, seriedad y respeto por la gallística mexicana.
+                    </p>
+                    <p class="text-xs text-gold/80 italic font-serif">
+                        "La calidad de la sangre se demuestra en el ruedo."
+                    </p>
                 </div>
-                <div class="card-content">
-                    <h3>Yellow Leg Hatch</h3>
-                    <p>La base de la resistencia y el coraje. Aves fuertes que no ceden terreno y definen en el suelo o aire.</p>
-                    <ul class="specs">
-                        <li><strong>Pluma:</strong> Retinto / Colorado</li>
-                        <li><strong>Estilo:</strong> Fuerza y resistencia</li>
-                        <li><strong>Disponibilidad:</strong> Sobre pedido</li>
+
+                <!-- Columna 2: Ubicación Exacta -->
+                <div>
+                    <h4 class="font-display text-sm font-bold uppercase tracking-widest text-white mb-4">Ubicación del Criadero</h4>
+                    <ul class="space-y-3 text-sm text-earth-sand/85">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-gold shrink-0 mt-0.5"></i>
+                            <span>
+                                <strong>Santa Isabel Ixtapan</strong><br>
+                                Municipio de Atenco, Estado de México.<br>
+                                <span class="text-xs text-earth-muted">Zona Texcoco / Atenco</span>
+                            </span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="clock" class="w-5 h-5 text-gold shrink-0 mt-0.5"></i>
+                            <span>
+                                <strong>Visitas al Criadero:</strong><br>
+                                Lunes a Domingo (Únicamente previa cita).
+                            </span>
+                        </li>
                     </ul>
                 </div>
+
+                <!-- Columna 3: Canales Directos -->
+                <div>
+                    <h4 class="font-display text-sm font-bold uppercase tracking-widest text-white mb-4">Contacto Directo</h4>
+                    <p class="text-xs text-earth-muted mb-4">
+                        Para informes sobre disponibilidad de pies de cría, pollos o visitas, comuníquese directamente por vía telefónica o WhatsApp:
+                    </p>
+                    <div class="space-y-3">
+                        <a href="https://wa.me/525666401617" target="_blank" rel="noopener noreferrer" 
+                           class="flex items-center justify-center gap-2 w-full py-3 px-4 bg-[#1e5c3a] hover:bg-[#257348] text-white font-semibold text-sm rounded transition-colors">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            Enviar WhatsApp Directo
+                        </a>
+                        <a href="tel:+525666401617" 
+                           class="flex items-center justify-center gap-2 w-full py-3 px-4 bg-earth-dark hover:bg-earth-border border border-gold/40 text-gold-light font-semibold text-sm rounded transition-colors">
+                            <i data-lucide="phone" class="w-4 h-4"></i>
+                            Llamar:5666401617
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-earth-muted gap-4">
+                <p>&copy; 2026 Partido Macorina y El Peña. Todos los derechos reservados.</p>
+                <p>Santa Isabel Ixtapan, Atenco, Edo. de Méx.</p>
             </div>
         </div>
-    </section>
-    <!-- SECCIÓN LÍNEAS DE SANGRE -->
-    <section id="lineas" class="bloodlines">
-        <div class="section-title">
-            <h2>Nuestras Líneas de Sangre</h2>
-            <div class="divider"></div>
-        </div>
-        
-        <div class="cards-grid">
-            <!-- Tarjeta 1 -->
-            <div class="card">
-                <div class="card-img">
-                    <span class="tag">Semental Base</span>
- <img src="https://images.unsplash.com/photo-1612170153139-6f881ff067e0?auto=format&fit=crop&w=600&q=80" alt="Línea Kelso">
-                </div>
-                <div class="card-content">
-                    <h3>Yellow Leg Hatch</h3>
-                    <p>La base de la resistencia y el coraje. Aves fuertes que no ceden terreno y definen en el suelo o aire.</p>
-                    <ul class="specs">
-                        <li><strong>Pluma:</strong> Retinto / Colorado</li>
-                        <li><strong>Estilo:</strong> Fuerza y resistencia</li>
-                        <li><strong>Disponibilidad:</strong> Sobre pedido</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- SECCIÓN LÍNEAS DE SANGRE -->
-    <section id="lineas" class="bloodlines">
-        <div class="section-title">
-            <h2>Nuestras Líneas de Sangre</h2>
-            <div class="divider"></div>
-        </div>
-        
-        <div class="cards-grid">
-            <!-- Tarjeta 1 -->
-            <div class="card">
-                <div class="card-img">
-                    <span class="tag">Semental Base</span>
-                </div>
-                <div class="card-content">
-                    <h3>Yellow Leg Hatch</h3>
-                    <p>La base de la resistencia y el coraje. Aves fuertes que no ceden terreno y definen en el suelo o aire.</p>
-                    <ul class="specs">
-                        <li><strong>Pluma:</strong> Retinto / Colorado</li>
-                        <li><strong>Estilo:</strong> Fuerza y resistencia</li>
-                        <li><strong>Disponibilidad:</strong> Sobre pedido</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN CONTACTO -->
-    <section id="contacto">
-        <div class="section-title">
-            <h2>Contacto y Ventas</h2>
-            <div class="divider"></div>
-        </div>
-
-        <div class="contact-container">
-            <form action="#" method="POST">
-                <div class="form-group">
-                    <label for="nombre">Nombre Completo</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Pérez" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="telefono">Teléfono / WhatsApp</label>
-                    <input type="tel" id="telefono" name="telefono" placeholder="Ej. 844 123 4567" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="interes">Motivo de Contacto</label>
-                    <select id="interes" name="interes">
-                        <option value="pies-de-cria">Adquisición de Pies de Cría</option>
-                        <option value="pollos">Lote de Pollos</option>
-                        <option value="compromisos">Invitación a Compromiso / Torneo</option>
-                        <option value="otro">Información General</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="mensaje">Mensaje</label>
-                    <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe los detalles de lo que buscas..."></textarea>
-                </div>
-
-                <button type="submit" class="btn">Enviar Mensaje</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- PIE DE PÁGINA -->
-    <footer>
-        <p>&copy; 2026 <strong>Partido Macorina y El Peña</strong> - Criadero de Gallos Finos. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- Inicializar Iconos -->
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
-</html>
+</html
