@@ -341,7 +341,7 @@
                         Para informes sobre disponibilidad de pies de cría, pollos o visitas, comuníquese directamente por vía telefónica o WhatsApp:
                     </p>
                     <div class="space-y-3">
-                        <a href="https://wa.me/525666401617" target="_blank" rel="noopener noreferrer" 
+                        <a href="https://wa.me/5666401617" target="_blank" rel="noopener noreferrer" 
                            class="flex items-center justify-center gap-2 w-full py-3 px-4 bg-[#1e5c3a] hover:bg-[#257348] text-white font-semibold text-sm rounded transition-colors">
                             <i data-lucide="message-circle" class="w-4 h-4"></i>
                             Enviar WhatsApp Directo
